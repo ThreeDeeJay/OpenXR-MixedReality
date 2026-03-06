@@ -4,7 +4,7 @@ name: Build
 env:
   GH_TOKEN: ${{github.token}}
   Branch: ${{github.ref_name}}
-  Artifacts: build/Release
+  Artifacts: bin\Release\x64\BasicXrApp_uwp
   Title: ${{github.event.repository.name}}
   Solution: BasicXrApp.sln
 
