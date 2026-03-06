@@ -66,8 +66,15 @@ jobs:
         msbuild
         /m "${{env.Solution}}"
         /p:Configuration="${{matrix.Configuration}}"
-        /p:PlatformToolset=v143
-      
+        /p:Platform="${{matrix.Settings.Platform}}"
+#/p:PlatformToolset=v143
+#/p:IncludePath="C:\Path\to\Include"
+#/p:LibPath="C:\Path\to\Lib"
+#/p:AdditionalIncludePaths="C:\Path\to\external\include"
+#/p:AdditionalLibraryDirectories="C:\Path\to\external\lib"
+#/p:AdditionalDependencies=file.lib
+#/p:LanguageStandard="stdcpp17"
+
     - name: List files
       run: ls -R
 
