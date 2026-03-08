@@ -17,7 +17,7 @@ on:
 
 jobs:
   Build:
-    name: ${{matrix.Settings.Name}}-${{matrix.Configuration}}
+    name: ${{matrix.Project}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
     runs-on: windows-2022
     strategy:
       matrix:
