@@ -4,9 +4,9 @@ name: Build
 env:
   GH_TOKEN: ${{github.token}}
   Branch: ${{github.ref_name}}
-  Artifacts: bin\Release\x64\BasicXrApp_uwp
-  Title: ${{github.event.repository.name}}
-  Solution: BasicXrApp.sln
+  Artifacts: bin\Release\x64
+  Title: OpenXR Mixed Reality Samples
+  Solution: Samples.sln
 
 on:
   push:
@@ -17,12 +17,11 @@ on:
 
 jobs:
   Build:
-    name: ${{matrix.Project}}-${{matrix.Settings.Name}}-${{matrix.Configuration}}
+    name: ${{matrix.Settings.Name}}-${{matrix.Configuration}}
     runs-on: windows-2022
     strategy:
       matrix:
         Configuration: [Release] #[Release, Debug]
-        Project: [samples/BasicXrApp/BasicXrApp_uwp.vcxproj, samples/EyeGazeInteractionUwp/EyeGazeInteractionUwp.vcxproj, samples/SampleSceneUwp/SampleSceneUwp.vcxproj, samples/SampleSceneWin32/SampleSceneWin32.vcxproj, samples/SceneUnderstandingUwp/SceneUnderstandingUwp.vcxproj, samples/ThreeSpacesUwp/ThreeSpacesUwp.vcxproj]
         Settings:
 #        - {
 #            Name: "Win32",
@@ -60,12 +59,12 @@ jobs:
 
     - name: Restore
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore "${{matrix.Project}}"
+      run: nuget restore "${{env.Solution}}"
 
     - name: Build
       run: >
         msbuild
-        /m "${{matrix.Project}}"
+        /m "${{env.Solution}}"
         /p:Configuration="${{matrix.Configuration}}"
         /p:Platform="${{matrix.Settings.Platform}}"
 #/p:PlatformToolset=v143
